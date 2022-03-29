@@ -1,0 +1,21 @@
+path: D:/dataset_garb/TACO/TACO/data/ #root
+train: # train images (relative to 'path') 3422 images
+  - batch_1
+  - batch_2
+  - batch_3
+  - batch_4
+  - batch_5
+  - batch_6
+  - batch_7
+  - batch_8
+  - batch_9
+  - batch_10
+  - batch_11
+  - batch_12
+  - batch_13
+val:
+  - batch_14
+  - batch_15
+# Classes
+nc: 3  # number of classes
+names: ['dry_rubbish','wet_rubbish','bag']  # class names
