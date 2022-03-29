@@ -55,7 +55,6 @@ class Classify(object):
             _, _, _, _, logits,_ = model(img_as_input.to(self.device))
         logits=torch.squeeze(logits, dim=0)
         logit=logits.argmax(dim=-1)
-        print(logit)
         result=id_to_name[str(logit.cpu().item())]
         return result
     def infer_batch(self,inImgs):
