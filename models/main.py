@@ -40,14 +40,17 @@ def res_model_pretrain(res_layer,num_classes):
         model = resnet50(pretrained=True, num_classes=num_classes)
 
     return model
-def get_res_model_my(num_classes,res_layer=34,model_path=None):
+def get_res_model_my(num_classes,res_layer=34,model_path=None,device='cpu'):
 
     if(res_layer==34):
         model=resnet34(pretrained=False,num_classes=num_classes)
         model.load_state_dict(torch.load(model_path))
     elif(res_layer==50):
         model = resnet50(pretrained=False, num_classes=num_classes)
-        model.load_state_dict(torch.load(model_path))
+        if(device=='cpu'):
+            model.load_state_dict(torch.load(model_path,map_location=torch.device('cpu')))
+        else:
+            model.load_state_dict(torch.load(model_path))
     return model
 if __name__ == '__main__':
     """

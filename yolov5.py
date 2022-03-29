@@ -18,7 +18,7 @@ import cv2
 import matplotlib.pyplot as plt
 import matplotlib
 from classify import Classify
-matplotlib.use('Qt5Agg')
+
 class YOLOv5(object):
     _defaults={
         "weights": ROOT /"weight/best39.pt",
@@ -35,16 +35,17 @@ class YOLOv5(object):
         else:
             return "Unrecognized attribute name '" + n + "'"
     # 初始化操作，加载模型
-    def __init__(self, device='0', **kwargs):
+    def __init__(self, device='cpu', **kwargs):
         self.__dict__.update(self._defaults)
         self.device = select_device(device)
+        print(self.device)
 
-        self.half = self.device != "cpu"
+        # self.half = self.device != "cpu"
 
         self.model= DetectMultiBackend(self.weights, device=self.device, dnn=False, data=self.data)
         self.imgsz = check_img_size(self.imgsz, s=self.model.stride)  # check img_size
-        if self.half:
-            self.model.half()  # to FP16
+        # if self.half:
+        #     self.model.half()  # to FP16
 
     def get_featuremap(self,inImg):
         img = letterbox(inImg, new_shape=self.imgsz)[0]
@@ -53,7 +54,7 @@ class YOLOv5(object):
         img = img.transpose((2, 0, 1))[::-1]  # HWC to CHW, BGR to RGB
         img = np.ascontiguousarray(img)
         img = torch.from_numpy(img).to(self.device)
-        img = img.half() if self.half else img.float()  # uint8 to fp16/32
+        img =  img.float()  # uint8 to fp16/32
         img /= 255.0  # 0 - 255 to 0.0 - 1.0
         if img.ndimension() == 3:
             img = img.unsqueeze(0)
@@ -144,7 +145,7 @@ class YOLOv5(object):
         img = img.transpose((2, 0, 1))[::-1]  # HWC to CHW, BGR to RGB
         img = np.ascontiguousarray(img)
         img = torch.from_numpy(img).to(self.device)
-        img = img.half() if self.half else img.float()  # uint8 to fp16/32
+        img =  img.float()  # uint8 to fp16/32
         img /= 255.0  # 0 - 255 to 0.0 - 1.0
         if img.ndimension() == 3:
             img = img.unsqueeze(0)

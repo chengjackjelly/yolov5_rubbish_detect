@@ -15,7 +15,6 @@ import torch
 from PIL import Image
 import numpy as np
 import cv2
-matplotlib.use('Qt5Agg')
 with open("detail/id_to_name48.json",'r') as load_f:
     id_to_name = json.load(load_f)
 with open("detail/detail_to_big48.json", 'r') as load_f:
@@ -31,9 +30,9 @@ class Classify(object):
         else:
             return "Unrecognized attribute name '" + n + "'"
     # 初始化操作，加载模型
-    def __init__(self, device='0', **kwargs):
+    def __init__(self, device='cpu', **kwargs):
         self.__dict__.update(self._defaults)
-        self.device = select_device(device)
+        self.device = device
         self.model=get_res_model_my(num_classes=48,res_layer=50,model_path=self.weights)
     def infer_single(self,inImg):
         #test

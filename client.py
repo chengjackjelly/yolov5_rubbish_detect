@@ -68,7 +68,7 @@ if __name__ == '__main__':
                 if boxs is not None:
                     for i, box in enumerate(boxs):
                         plot_one_box((box), img, label=str(ids[i]))
-                cv2.imwrite("result/result.jpg",img)
+                cv2.imwrite("result/result.jpg",img)  #结果存在result文件夹里
         else:
             print("no new object detected")
 
