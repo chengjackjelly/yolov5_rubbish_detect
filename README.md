@@ -1,4 +1,4 @@
-<h1>说明文档</h1>
+<h1>说明文档3.29</h1>
 <h2>1.install</h2>
 
 >git clone https://github.com/chengjackjelly/yolov5_rubbish_detect</br>
