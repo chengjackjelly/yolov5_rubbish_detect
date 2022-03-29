@@ -53,10 +53,10 @@ if __name__ == '__main__':
     opt = parse_opt()
     prepath=opt.pre
     postpath=opt.post
-    preFrame = open(prepath, "rb").read()
+    preFrame = open(prepath, "rb").read() #以二进制格式读入图像数据。
     postFrame = open(postpath, "rb").read()
     request_input = {'preimg': preFrame, 'postimg': postFrame}
-    print(request_input)
+
     result = requests.post('http://127.0.0.1:7000/infer', files=request_input).json()
     print(result)
     if result['success']:
