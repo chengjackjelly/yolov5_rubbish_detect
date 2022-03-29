@@ -37,7 +37,7 @@ class Classify(object):
         self.model=get_res_model_my(num_classes=48,res_layer=50,model_path=self.weights)
     def infer_single(self,inImg):
         #test
-        self.device='cpu'
+
         #图像数据转为tensor
         mean = [0.485, 0.456, 0.406]
         std = [0.229, 0.224, 0.225]
@@ -60,7 +60,7 @@ class Classify(object):
         return result
     def infer_batch(self,inImgs):
         #test
-        self.device = 'cpu'
+
         imglist=[]
         detail_labels=[]
         # 图像数据转为tensor
